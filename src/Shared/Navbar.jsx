@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FaHome, FaUserAlt, FaProjectDiagram, FaCode, FaEnvelope, FaBars, FaTimes } from 'react-icons/fa';
 import { MdOutlineLightbulb } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';

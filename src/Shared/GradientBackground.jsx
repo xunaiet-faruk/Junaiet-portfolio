@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 const ThreeDBackground = () => {
@@ -115,7 +115,7 @@ const ThreeDBackground = () => {
             codeBlocks.push(sprite);
         }
 
-        // Create floating tech logos as 3D objects
+       
         const techLogos = [];
         const techStack = [
             { name: 'React', color: 0x61dafb, pos: [-4, 3, -3], size: 0.8 },
@@ -374,7 +374,7 @@ const ThreeDBackground = () => {
         };
     }, []);
 
-    return <div ref={containerRef} className="fixed inset-0 -z-10" />;
+    return <div ref={containerRef} className="fixed  inset-0 -z-10" />;
 };
 
 export default ThreeDBackground; 

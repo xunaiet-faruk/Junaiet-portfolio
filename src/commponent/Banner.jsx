@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { FaDownload, FaGithub, FaLinkedin, FaEnvelope, FaFacebook } from 'react-icons/fa';
 import { TypeAnimation } from 'react-type-animation';
 
-const HeroSection = () => {
+const Banner = () => {
     const controls = useAnimation();
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, threshold: 0.1 });
@@ -14,7 +14,7 @@ const HeroSection = () => {
         }
     }, [controls, isInView]);
 
-    // Animation variants
+    
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -98,7 +98,7 @@ const HeroSection = () => {
             </div>
 
             <div className="container px-12 py-20 mx-auto w-full">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-40">
 
                     {/* LEFT SIDE - Content */}
                     <motion.div
@@ -154,9 +154,9 @@ const HeroSection = () => {
                             variants={itemVariants}
                             className="text-gray-400 text-base sm:text-lg mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
                         >
-                            Passionate developer with 1+ years of experience building exceptional
-                            web applications. Specialized in React, Next.js, and modern JavaScript frameworks.
-                            Let's bring your ideas to life!
+                            Full Stack Developer skilled in React, Next.js, Node.js, Express.js, and MongoDB.
+                            I love building modern, high-performance web applications and turning ideas into
+                            real, impactful digital products.
                         </motion.p>
 
                         {/* CTA Buttons */}
@@ -281,7 +281,7 @@ const HeroSection = () => {
                         >
                             <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-gradient-to-r from-purple-500 via-pink-500 to-purple-500 shadow-2xl shadow-purple-500/50">
                                 {/* Image with gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 z-10"></div>
+                                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/15 to-pink-500/10 z-10"></div>
                                 <img
                                     src="/junaiet.png"
                                     alt="Profile"
@@ -369,4 +369,4 @@ const HeroSection = () => {
     );
 };
 
-export default HeroSection;
+export default Banner;
