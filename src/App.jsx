@@ -2,6 +2,8 @@
 import './App.css'
 import AboutMe from './commponent/AboutMe'
 import Banner from './commponent/Banner'
+import ContactMe from './commponent/ContactMe'
+import Footer from './commponent/Footer'
 import MyProject from './commponent/MyProject'
 import Skils from './commponent/Skils'
 import ThreeDBackground from './Shared/GradientBackground'
@@ -18,6 +20,8 @@ function App() {
 <Skils/>
 <AboutMe/>
 <MyProject/>
+<ContactMe/>
+<Footer/>
 
  </>
   )
