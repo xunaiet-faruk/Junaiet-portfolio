@@ -24,7 +24,7 @@ const Skills = () => {
         { name: 'Firebase', icon: SiFirebase, color: '#FFCA28', level: 88 },
     ];
 
-    // Jumping animation variants
+    
     const jumpVariants = {
         hover: {
             y: [0, -20, -10, -5, 0],
@@ -53,7 +53,7 @@ const Skills = () => {
                         transition={{ duration: 2, repeat: Infinity }}
                         className="inline-block mb-4"
                     >
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                        <div className="w-20 h-20 rounded-full backdrop-blur-3xl  bg-white/5 shadow-xl   flex items-center justify-center">
                             <span className="text-4xl">💪</span>
                         </div>
                     </motion.div>
