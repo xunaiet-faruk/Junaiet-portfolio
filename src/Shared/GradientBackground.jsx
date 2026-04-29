@@ -1,4 +1,4 @@
-import  { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 const ThreeDBackground = () => {
@@ -11,12 +11,22 @@ const ThreeDBackground = () => {
 
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setClearColor(0x000000, 0);
-        containerRef.current.appendChild(renderer.domElement);
+
+        const canvas = renderer.domElement;
+        canvas.style.position = 'fixed';
+        canvas.style.top = '50%';
+        canvas.style.left = '50%';
+        canvas.style.transform = 'translate(-50%, -50%)';
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '-10';
+
+        containerRef.current.appendChild(canvas);
 
         camera.position.z = 20;
         camera.position.y = 2;
 
-        // Create a central glowing sphere (core)
         const coreGeometry = new THREE.SphereGeometry(1.5, 64, 64);
         const coreMaterial = new THREE.MeshStandardMaterial({
             color: 0x8b5cf6,
@@ -28,7 +38,6 @@ const ThreeDBackground = () => {
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
 
-        // Create orbiting code rings
         const createCodeRing = (radius, color, speed, tilt = 0) => {
             const ringGeometry = new THREE.TorusGeometry(radius, 0.08, 128, 200);
             const ringMaterial = new THREE.MeshStandardMaterial({
@@ -56,7 +65,6 @@ const ThreeDBackground = () => {
 
         rings.forEach(ring => scene.add(ring));
 
-        // Create floating code blocks (binary/hex digits)
         const codeBlocks = [];
         const languages = [
             { name: '</>', color: 0x8b5cf6, size: 0.4 },
@@ -69,7 +77,6 @@ const ThreeDBackground = () => {
             { name: '☕', color: 0xef4444, size: 0.45 },
         ];
 
-        // Create canvas textures for text
         const createTextSprite = (text, color) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -90,7 +97,6 @@ const ThreeDBackground = () => {
             return sprite;
         };
 
-        // Create orbiting code sprites
         for (let i = 0; i < 60; i++) {
             const lang = languages[i % languages.length];
             const sprite = createTextSprite(lang.name, `#${lang.color.toString(16)}`);
@@ -115,7 +121,6 @@ const ThreeDBackground = () => {
             codeBlocks.push(sprite);
         }
 
-       
         const techLogos = [];
         const techStack = [
             { name: 'React', color: 0x61dafb, pos: [-4, 3, -3], size: 0.8 },
@@ -148,7 +153,6 @@ const ThreeDBackground = () => {
             techLogos.push(logo);
         });
 
-        // Create particle system as "code rain" effect
         const particleCount = 4000;
         const particleGeometry = new THREE.BufferGeometry();
         const particlePositions = new Float32Array(particleCount * 3);
@@ -180,7 +184,6 @@ const ThreeDBackground = () => {
         const particles = new THREE.Points(particleGeometry, particleMaterial);
         scene.add(particles);
 
-        // Create floating binary numbers
         const binaryCount = 200;
         const binarySprites = [];
 
@@ -215,7 +218,6 @@ const ThreeDBackground = () => {
             binarySprites.push(sprite);
         }
 
-        // Create a glowing halo around the core
         const haloGeometry = new THREE.SphereGeometry(2.2, 32, 32);
         const haloMaterial = new THREE.MeshBasicMaterial({
             color: 0x8b5cf6,
@@ -226,7 +228,6 @@ const ThreeDBackground = () => {
         const halo = new THREE.Mesh(haloGeometry, haloMaterial);
         scene.add(halo);
 
-        // Add lightning effect lines
         const lightningLines = [];
         for (let i = 0; i < 30; i++) {
             const points = [];
@@ -254,7 +255,6 @@ const ThreeDBackground = () => {
             lightningLines.push(line);
         }
 
-        // Lights
         const ambientLight = new THREE.AmbientLight(0x1a1a2e);
         scene.add(ambientLight);
 
@@ -270,7 +270,6 @@ const ThreeDBackground = () => {
         backLight.position.set(2, 1, -6);
         scene.add(backLight);
 
-        // Mouse interaction
         let mouseX = 0;
         let mouseY = 0;
         let targetRotationX = 0;
@@ -279,31 +278,27 @@ const ThreeDBackground = () => {
         const handleMouseMove = (event) => {
             mouseX = (event.clientX / window.innerWidth) * 2 - 1;
             mouseY = (event.clientY / window.innerHeight) * 2 - 1;
-            targetRotationX = mouseY * 0.5;
-            targetRotationY = mouseX * 0.5;
+            targetRotationX = mouseY * 0.3;
+            targetRotationY = mouseX * 0.3;
         };
 
         window.addEventListener('mousemove', handleMouseMove);
 
         let time = 0;
 
-        // Animate
         const animate = () => {
             requestAnimationFrame(animate);
             time += 0.01;
 
-            // Rotate rings
             rings.forEach(ring => {
                 ring.rotation.y += ring.userData.speed;
                 ring.rotation.x = ring.userData.tilt + Math.sin(time * 0.5) * 0.1;
             });
 
-            // Animate core
             core.scale.setScalar(1 + Math.sin(time * 3) * 0.05);
             halo.scale.setScalar(1 + Math.sin(time * 2) * 0.03);
             halo.material.opacity = 0.15 + Math.sin(time * 2) * 0.05;
 
-            // Animate orbiting code blocks
             codeBlocks.forEach(block => {
                 block.userData.angle += block.userData.speed;
                 block.position.x = Math.cos(block.userData.angle) * block.userData.radius;
@@ -311,14 +306,12 @@ const ThreeDBackground = () => {
                 block.position.y = block.userData.originalY + Math.sin(time * 2) * 0.2;
             });
 
-            // Animate tech logos
             techLogos.forEach(logo => {
                 logo.rotation.x += logo.userData.rotationSpeed;
                 logo.rotation.y += logo.userData.rotationSpeed * 1.5;
                 logo.position.y = logo.userData.originalPos.y + Math.sin(time * logo.userData.floatSpeed) * 0.2;
             });
 
-            // Animate binary sprites (falling effect)
             binarySprites.forEach(sprite => {
                 sprite.position.y -= sprite.userData.speedY;
                 if (sprite.position.y < -10) {
@@ -333,21 +326,17 @@ const ThreeDBackground = () => {
                 }
             });
 
-            // Rotate particles
             particles.rotation.y += 0.002;
             particles.rotation.x += 0.001;
 
-            // Mouse follow with smooth interpolation
-            camera.position.x += (targetRotationX * 2 - camera.position.x) * 0.05;
-            camera.position.y += (targetRotationY * 1.5 - camera.position.y) * 0.05;
+            camera.position.x += (targetRotationX * 1.5 - camera.position.x) * 0.03;
+            camera.position.y += (targetRotationY * 1.2 - camera.position.y) * 0.03;
             camera.lookAt(0, 0, 0);
 
-            // Animate lights
             mainLight.intensity = 1.2 + Math.sin(time * 2) * 0.4;
             fillLight.intensity = 0.6 + Math.cos(time * 1.7) * 0.3;
             backLight.intensity = 0.5 + Math.sin(time * 2.3) * 0.3;
 
-            // Animate lightning lines
             lightningLines.forEach((line, idx) => {
                 line.material.opacity = 0.2 + Math.sin(time * 3 + idx) * 0.2;
             });
@@ -368,13 +357,13 @@ const ThreeDBackground = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('mousemove', handleMouseMove);
-            if (containerRef.current) {
-                containerRef.current.removeChild(renderer.domElement);
+            if (containerRef.current && containerRef.current.contains(canvas)) {
+                containerRef.current.removeChild(canvas);
             }
         };
     }, []);
 
-    return <div ref={containerRef} className="fixed  inset-0 -z-10" />;
+    return <div ref={containerRef} className="fixed inset-0 -z-10 pointer-events-none" />;
 };
 
-export default ThreeDBackground; 
+export default ThreeDBackground;
