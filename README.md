@@ -1,9 +1,5 @@
 # 🌟 Junaiet Faruk - Full Stack Developer Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-purple?style=for-the-badge&logo=vercel)](https://junaiet-portfolio.vercel.app)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/xunaiet-faruk)
-[![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-06B6D4?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
 
 ## 📌 Live Preview
 

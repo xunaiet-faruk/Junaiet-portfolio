@@ -10,6 +10,7 @@ import {
 } from 'react-icons/si';
 import { FaNodeJs } from 'react-icons/fa';
 import ProjectDetailsModal from './ProjectDetailsModal';
+import { RiNextjsFill } from 'react-icons/ri';
 
 const MyProject = () => {
     const ref = useRef(null);
@@ -22,89 +23,145 @@ const MyProject = () => {
     const projects = [
         {
             id: 1,
+            title: "Parcel Management System",
+            fullTitle: "Parcel Delivery & Tracking System (Next.js Application)",
+            description: "An enterprise-grade courier logistics platform with real-time tracking, role-based access control, intelligent parcel assignment system, automated invoicing, and seamless end-to-end delivery management.",            fullPageImage: "/parcel.png",
+            tech: ["Next.js", "MongoDB", "Express.js", "Node.js", "Tailwind CSS", "Firebase", "Framer Motion", "Stripe"],
+            icons: [RiNextjsFill, SiMongodb, SiExpress, FaNodeJs, SiTailwindcss, SiFirebase],
+            github: "https://github.com/your-username/parcel-delivery-system",
+            live: "https://parcel-managment-web.vercel.app",
+            features: [
+                "Role-based access (Admin/Rider/User)",
+                "Real-time parcel tracking with map",
+                "Smart location-based assignment",
+                "Automated invoice generation (PDF)",
+                "Live analytics dashboard"
+            ],
+            fullFeatures: {
+                landing: `🎯 LANDING PAGE – Modern Courier Platform Interface:
+A professional logistics dashboard with live parcel tracking search bar, dynamic coverage map showing serviceable areas, pricing calculator based on weight & distance, customer testimonials carousel, real-time delivery stats counter, emergency booking CTA, FAQ section, and blog updates about courier services.`,
+
+                auth: `🔐 AUTHENTICATION SYSTEM – Role-Based Access:
+Three separate registration flows:
+• USER: Name, email, phone, address, password
+• RIDER: Above + driving license, bike number, NID, profile photo
+• ADMIN: Created only by super admin via secret invite code
+Login system uses JWT tokens stored in HTTP-only cookies. Password reset via email OTP. Google login available for users only.`,
+
+                user: `👤 USER PANEL – Shipment Management Dashboard:
+
+Email Feature: Users receive automatic email when parcel is created, picked up, out for delivery, and delivered. Also get invoice email with PDF attachment.
+
+Main Features:
+• Create new parcel (weight, dimensions, delivery address, express/normal)
+• Real-time tracking on interactive map
+• Edit/cancel parcel before "picked up" status
+• Payment history with Stripe integration
+• Download invoices as PDF anytime
+• Rate rider after delivery
+• Support ticket system for complaints
+
+Challenges Faced:
+• Implementing real-time location updates without draining API calls – solved by using WebSocket with 10-second intervals
+• Invoice generation with dynamic tax calculation – used jsPDF with custom template engine
+• Preventing duplicate payments – implemented idempotency keys in Stripe webhook`,
+
+                rider: `🏍️ RIDER PANEL – Delivery Operation Dashboard:
+
+Email Feature: Riders get email when new parcel assigned, when user cancels a parcel, daily earning summary at 9 PM, and admin payout notifications.
+
+Main Features:
+• View assigned parcels based on current location
+• Accept/reject delivery requests (reject reason required)
+• Update status: Picked → On Route → Reached → Delivered
+• Navigate using integrated Google Maps
+• Earnings tracker with per-delivery breakdown
+• Weekly performance report
+• Chat with admin for delivery issues
+
+Challenges Faced:
+• Location-based assignment matching – used Haversine formula to calculate distances between rider and pickup points
+• Offline status sync – built IndexedDB queue to store status updates when network is poor
+• Realtime race conditions when multiple riders accept same parcel – solved with Redis locks`,
+
+                admin: `👨‍💼 ADMIN PANEL – Central Control Station:
+
+Email Feature: Admin receives alerts for new rider registrations pending approval, user support tickets, daily revenue summary, low-balance users, and system error logs.
+
+Main Features:
+• Live analytics: total parcels, active riders, revenue chart, delivery success rate
+• Rider onboarding: view documents, approve/reject, assign zones
+• User management: block/unblock, view all parcels, reset password
+• Smart delivery assignment (auto-match parcels to nearest available rider)
+• Monitor all parcels with filter by status/city
+• Generate and export monthly reports (CSV/PDF)
+• Support ticket resolution system
+• Payout management for riders
+
+Challenges Faced:
+• Auto-assignment algorithm – implemented a priority queue considering rider load, distance, and rating
+• Real-time dashboard updates – used Server-Sent Events (SSE) instead of polling to reduce server load
+• Bulk invoice export – streaming large datasets using Node.js streams to avoid memory overflow`
+            },
+            color: "#ff",
+            icon: FaBriefcase
+        },
+
+        {
+            id: 2,
             title: "Blood Donation Web",
-            fullTitle: "Blood Donation Web (Full Stack Website)",
-            description: "A full-stack blood donation platform with role-based access, real-time request management, and donor search.",
+            fullTitle: "Blood Donation Platform & Emergency Medical Network",
+            description: "A community-focused healthcare platform engineered to bridge the gap between voluntary blood donors, medical volunteers, and patients seeking urgent blood transfusions.",
             image: "/blood.png",
             fullPageImage: "/blood.png",
-            tech: ["React.js", "MongoDB", "Express.js", "Node.js", "Tailwind CSS", "Firebase", "Framer Motion","Axios"],
+            tech: ["React.js", "MongoDB", "Express.js", "Node.js", "Tailwind CSS", "Firebase", "Framer Motion", "Axios"],
             icons: [SiReact, SiMongodb, SiExpress, FaNodeJs, SiTailwindcss, SiFirebase],
             github: "https://github.com/xunaiet-faruk/Blood-donation-client",
             live: "https://blood-donation-web-2b177.web.app",
             features: [
-                "Role-based Authorization (Admin, Donor, Volunteer)",
-                "Donor Features: Create, Update, track donation requests",
-                "Volunteer Features: View & manage donation requests",
-                "Admin Features: Manage users, assign roles, monitor statistics",
-                "Public Features: Searchable donor directory, real-time updates"
+                "Advanced donor classification engine searchable by regional zone and blood grouping",
+                "Interactive emergency broadcast banner pushing high-priority transfusion requests",
+                "Automated validation system checking last donation timestamps to ensure health safety",
+                "Comprehensive volunteer approval workflows for reviewing pending field logs",
+                "Interactive central metrics visualizing global collection progress and current medical counts"
             ],
             fullFeatures: {
-                landing: "Hero section with blood donation statistics, emergency contact banner, how it works guide, donor registration CTA",
-                auth: "Email/Password login, Google Sign-in, role selection (Admin/Donor/Volunteer)",
-                donor: "Dashboard to create blood requests, track status, view donation history, profile management",
-                volunteer: "Dashboard to view assigned requests, update status, communicate with donors, route guidance",
-                admin: "Complete user management, role assignment, donation statistics charts, request monitoring",
-                public: "Search donors by blood group, location, real-time request updates, emergency alerts"
+                landing: "Displays a highly informative public portal detailing real-time emergency requests, live tracking statistics of total blood bags collected, step-by-step documentation on donation eligibility, localized camp schedules, and an intuitive immediate request registration form.",
+                auth: "Features individual secure onboarding profiles, role determination during structural signup, Google-driven quick integration, and JWT cryptographic verification for sensitive profile records.",
+                user: "Allows registered blood donors to update their donation availability state (e.g., Available / Busy), draft explicit emergency blood requests with custom hospital locations, track active responses from volunteers, update personal health parameters, and view a complete legacy log of past donations.",
+                rider: "Functions as a specialized Volunteer Workspace where certified monitors can intercept emergency public requests, verify patient hospital requests, update status to 'In Progress' during blood collection, cross-check regional donor locations, and communicate directly with hospital contacts.",
+                admin: "An administrative control hub containing total system monitoring features, tools to assign or revoke volunteer roles, analytical performance charts reporting collection curves, master user blocking mechanisms, and administrative validation control for community-wide blog posts."
             },
             color: "#ef4444",
             icon: FaTint
         },
         {
-            id: 2,
+            id: 3,
             title: "Restaurant Management System",
-            fullTitle: "Restaurant Management System (Full Stack Website)",
-            description: "A restaurant management system with admin analytics, order and user management, and secure payment integration.",
+            fullTitle: "E-Commerce Culinary Platform & Point of Sales (POS) Engine",
+            description: "An advanced hospitality operating system integrating commercial restaurant storefront interfaces with complex back-of-house tracking, table orders, and local financial settlement.",
             image: "/restourant.png",
             fullPageImage: "/restourant.png",
-            tech: ["React.js", "MongoDB", "Express.js", "Node.js", "Tailwind", "SSL Commerz", "Chart.js", "Axios"],
+            tech: ["React.js", "MongoDB", "Express.js", "Node.js", "Tailwind CSS", "SSL Commerz", "Chart.js", "Axios"],
             icons: [SiReact, SiMongodb, SiExpress, FaNodeJs, SiTailwindcss],
             github: "https://github.com/xunaiet-faruk/Restorant-project-client",
             live: "https://restorant-web.web.app",
             features: [
-                "Admin Features: Analytics dashboard with 4 charts",
-                "Food CRUD with pagination, order status management",
-                "User Features: Dashboard with order metrics",
-                "Payment with SSL Commerz (Subtotal, Delivery, Discount, Vat)",
-                "Payment History & profile management"
+                "Complete item catalog management (CRUD) supporting multiple food variants and pagination",
+                "Advanced custom checkout cart computing variable delivery fees, localized discounts, and VAT rules",
+                "Full-stack payment integration supporting regional credit cards and mobile wallets via SSL Commerz",
+                "Multi-chart operational analytics displaying item demand distribution and revenue metrics",
+                "Real-time reactive order processing pipeline linking frontend requests to corporate kitchens"
             ],
             fullFeatures: {
-                landing: "Hero banner with restaurant specials, popular food items, customer testimonials, restaurant location",
-                auth: "User/Admin login, registration with email, password reset, role-based access",
-                user: "Order food, cart management, track orders in real-time, payment history, favorites",
-                admin: "Analytics dashboard with 4 charts, manage food items (CRUD), manage orders, user management",
-                payment: "SSL Commerz integration, tax calculation (VAT, Discount, Delivery fee), invoice generation"
+                landing: "Presents a fully visual culinary showcase containing seasonal interactive promotional carousels, organized menu boards categorized by cuisine type, dynamic top-selling recommendations, localized branch maps, and customer rating reviews.",
+                auth: "Maintains structured consumer authentication profiles, encrypted access handling via cookies, password restoration interfaces, and robust server-side structural checks separating customers from managers.",
+                user: "Provides a responsive shopping dashboard allowing users to build up persistent food orders, track active chef preparations and courier tracking statuses, view complex financial receipts, leave star ratings on historical items, and browse personal item favorites.",
+                rider: "Operates as a dedicated Kitchen/Delivery Terminal layout that displays active chef updates, maps delivery coordinates to specific user locations, provides tools to mark assignments as 'Out for Delivery' or 'Fulfilled', and compiles itemized checklists for packing agents.",
+                admin: "A data-rich operations executive dashboard featuring 4 responsive charts calculating daily sales volumes, inventory control tables to add, edit, or delete dishes, structural order updates to transition items from 'Pending' to 'Preparing', and massive user profiling management tools."
             },
             color: "#f59e0b",
             icon: FaUtensils
-        },
-        {
-            id: 3,
-            title: "Job Portal Platform",
-            fullTitle: "Job Portal Platform (MERN Stack Website)",
-            description: "A job portal platform with authentication, job posting, and a bidding system for managing freelance  work with aweome ui.",
-            image: "/job.png",
-            fullPageImage: "/job.png",
-            tech: ["React.js", "MongoDB", "Express.js", "Node.js", "Tailwind CSS", "Firebase", "Framer Motion","Axios"],
-            icons: [SiReact, SiMongodb, SiExpress, FaNodeJs, SiTailwindcss, SiFirebase],
-            github: "https://github.com/xunaiet-faruk/jobs-portal-web-client",
-            live: "https://job-portal-aa5bd.web.app",
-            features: [
-                "Job Management: Add, update, delete jobs with category selection",
-                "Bidding System: Place bids with custom price and deadline",
-                "Employer can accept/reject bids",
-                "My Posted Jobs: Manage job posts with update/delete",
-                "My Bids: Track bid status (pending, in progress, complete, rejected)",
-                "Bid Request: Accept/reject bids with status tracking"
-            ],
-            fullFeatures: {
-                landing: "Job search bar, featured jobs, categories, company highlights, statistics counter",
-                auth: "Job seeker/Employer registration, profile setup, email verification, password reset",
-                employer: "Post jobs with categories, manage applications, accept/reject bids, hiring analytics",
-                jobSeeker: "Browse jobs by category, place bids with custom price/deadline, track applications, portfolio",
-                bidding: "Real-time bidding system, status tracking (pending, in progress, complete, rejected), notifications"
-            },
-            color: "#06b6d4",
-            icon: FaBriefcase
         }
     ];
 
@@ -322,34 +379,27 @@ const MyProject = () => {
 
                                             {/* Tech Icons Floating */}
                                             <div className="absolute bottom-3 left-3 flex gap-1 z-10">
-                                                {project.icons.slice(0, 3).map((TechIcon, idx) => (
-                                                    <motion.div
-                                                        key={idx}
-                                                        whileHover={{ y: -5 }}
-                                                        className="w-8 h-8 rounded-full bg-gray-900/80 backdrop-blur-sm flex items-center justify-center"
-                                                    >
-                                                        <TechIcon className="text-sm" style={{ color: project.color }} />
-                                                    </motion.div>
+                                                {project.icons.map((TechIcon, idx) => {
+                                                    // Icon colors based on technology
+                                                    let iconColor = "";
+                                                    if (TechIcon === RiNextjsFill) iconColor = "#ffffff";
+                                                    else if (TechIcon === SiMongodb) iconColor = "#47A248";
+                                                    else if (TechIcon === SiExpress) iconColor = "#ffffff";
+                                                    else if (TechIcon === FaNodeJs) iconColor = "#339933";
+                                                    else if (TechIcon === SiTailwindcss) iconColor = "#06B6D4";
+                                                    else if (TechIcon === SiFirebase) iconColor = "#FFCA28";
+                                                    else if (TechIcon === SiReact) iconColor = "#61DAFB";
 
-                                                ))}
-                                                <motion.div
-                                                    whileHover={{ y: -5 }}
-                                                    className="w-8 h-8 rounded-full bg-gray-900/80 backdrop-blur-sm flex items-center justify-center"
-                                                >
-                                                    <SiFirebase className="text-sm text-yellow-500" />
-                                                </motion.div>
-                                                <motion.div
-                                                    whileHover={{ y: -5 }}
-                                                    className="w-8 h-8 rounded-full bg-gray-900/80 backdrop-blur-sm flex items-center justify-center"
-                                                >
-                                                    <FaNodeJs className="text-sm text-green-500" />
-                                                </motion.div>
-                                                <motion.div
-                                                    whileHover={{ y: -5 }}
-                                                    className="w-8 h-8 rounded-full bg-gray-900/80 backdrop-blur-sm flex items-center justify-center"
-                                                >
-                                                    <SiMongodb className="text-sm text-green-400" />
-                                                </motion.div>
+                                                    return (
+                                                        <motion.div
+                                                            key={idx}
+                                                            whileHover={{ y: -5 }}
+                                                            className="w-8 h-8 rounded-full bg-gray-900/80 backdrop-blur-sm flex items-center justify-center"
+                                                        >
+                                                            <TechIcon className="text-sm" style={{ color: iconColor }} />
+                                                        </motion.div>
+                                                    );
+                                                })}
                                             </div>
                                         </motion.div>
 
