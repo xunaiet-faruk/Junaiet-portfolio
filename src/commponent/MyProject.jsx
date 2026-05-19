@@ -28,7 +28,7 @@ const MyProject = () => {
             description: "An enterprise-grade courier logistics platform with real-time tracking, role-based access control, intelligent parcel assignment system, automated invoicing, and seamless end-to-end delivery management.",            fullPageImage: "/parcel.png",
             tech: ["Next.js", "MongoDB", "Express.js", "Node.js", "Tailwind CSS", "Firebase", "Framer Motion", "Stripe"],
             icons: [RiNextjsFill, SiMongodb, SiExpress, FaNodeJs, SiTailwindcss, SiFirebase],
-            github: "https://github.com/your-username/parcel-delivery-system",
+            github: "https://github.com/xunaiet-faruk/Parcel-Tracking-System",
             live: "https://parcel-managment-web.vercel.app",
             features: [
                 "Role-based access (Admin/Rider/User)",
